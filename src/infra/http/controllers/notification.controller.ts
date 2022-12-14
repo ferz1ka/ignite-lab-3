@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
 import { NotificationRepository } from 'src/app/repositories/notificationRepository';
 import { NotificationService } from '../../../app/services/notificationService';
 import { CreateNotificationDto } from '../dtos/createNotificationDto';
@@ -16,6 +16,11 @@ export class NotificationController {
     return await this.notificationRepository.list()
   }
 
+  @Get(':id')
+  async show(@Param('id') id: string) {
+    return await this.notificationRepository.show(id)
+  }
+
   @Post()
   async create(@Body() body: CreateNotificationDto) {
     const { recipientId, content, category } = body
@@ -29,5 +34,11 @@ export class NotificationController {
     return {
       notification
     }
+  }
+
+  // DEV ONLY
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return await this.notificationRepository.remove(id)
   }
 }

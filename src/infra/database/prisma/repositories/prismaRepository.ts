@@ -11,6 +11,14 @@ export class PrismaRepository implements NotificationRepository {
     return await this.prismaService.notification.findMany() as NotificationModel[]
   }
 
+  async show(notificationId: string): Promise<NotificationModel> {
+    return await this.prismaService.notification.findUnique({
+      where: {
+        id: notificationId
+      }
+    }) as NotificationModel
+  }
+
   async create(notification: NotificationModel): Promise<void> {
     await this.prismaService.notification.create({
       data: {
@@ -20,6 +28,14 @@ export class PrismaRepository implements NotificationRepository {
         content: notification.content,
         readAt: notification.readAt,
         createdAt: notification.createdAt,
+      }
+    })
+  }
+
+  async remove(notificationId: string): Promise<void> {
+    await this.prismaService.notification.delete({
+      where: {
+        id: notificationId
       }
     })
   }
