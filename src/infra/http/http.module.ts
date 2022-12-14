@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common'
+import { DatabaseModule } from '../database/database.module';
 import { NotificationController } from './controllers/notification.controller';
 import { NotificationService } from '../../app/services/notificationService'
-import { DatabaseModule } from '../database/database.module';
+import { PrismaRepository } from '../database/prisma/repositories/prismaRepository';
+import { NotificationRepository } from '../../app/repositories/notificationRepository';
 
 @Module({
   imports: [DatabaseModule],

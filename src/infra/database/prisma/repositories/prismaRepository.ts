@@ -7,6 +7,10 @@ import { PrismaService } from "../services/prismaService";
 export class PrismaRepository implements NotificationRepository {
   constructor(private prismaService: PrismaService) { }
 
+  async list(): Promise<NotificationModel[]> {
+    return await this.prismaService.notification.findMany() as NotificationModel[]
+  }
+
   async create(notification: NotificationModel): Promise<void> {
     await this.prismaService.notification.create({
       data: {
