@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
-import { NotificationRepository } from 'src/app/repositories/notificationRepository';
-import { NotificationService } from '../../../app/services/notificationService';
+import { NotificationRepository } from '@app/repositories/notificationRepository';
+import { NotificationService } from '@app/use-cases/notificationService';
 import { CreateNotificationDto } from '../dtos/createNotificationDto';
 
 @Controller('notification')

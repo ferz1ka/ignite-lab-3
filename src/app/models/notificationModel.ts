@@ -1,4 +1,4 @@
-import { Replace } from "../../utils/replace"
+import { Replace } from "@helpers/replace"
 import { randomUUID } from 'node:crypto'
 
 export interface NotificationModelProps {

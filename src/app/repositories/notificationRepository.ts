@@ -1,4 +1,4 @@
-import { NotificationModel } from "../models/notificationModel";
+import { NotificationModel } from "@app/models/notificationModel";
 
 export abstract class NotificationRepository {
   abstract list(): Promise<NotificationModel[]>
