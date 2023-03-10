@@ -1,13 +1,14 @@
 import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
 import { NotificationRepository } from '@app/repositories/notificationRepository';
-import { NotificationService } from '@app/use-cases/notificationService';
+import { SendNotification } from '@app/use-cases/send-notification';
 import { CreateNotificationDto } from '../dtos/createNotificationDto';
+import { NotificationViewModel } from '../viewModels/notificationViewModel';
 
 @Controller('notification')
 export class NotificationController {
 
   constructor(
-    private notificationService: NotificationService,
+    private sendNotification: SendNotification,
     private notificationRepository: NotificationRepository
   ) { }
 
@@ -18,21 +19,21 @@ export class NotificationController {
 
   @Get(':id')
   async show(@Param('id') id: string) {
-    return await this.notificationRepository.show(id)
+    return await this.notificationRepository.findById(id)
   }
 
   @Post()
   async create(@Body() body: CreateNotificationDto) {
     const { recipientId, content, category } = body
 
-    const { notification } = await this.notificationService.execute({
+    const { notification } = await this.sendNotification.execute({
       content,
       category,
       recipientId,
     })
 
     return {
-      notification
+      notification: NotificationViewModel.toHTTP(notification)
     }
   }
 

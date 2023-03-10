@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { NotificationRepository } from '@app/repositories/notificationRepository';
-import { PrismaRepository } from './prisma/repositories/prismaRepository';
+import { PrismaNotificationRepository } from './prisma/repositories/prismaNotificationRepository';
 import { PrismaService } from './prisma/services/prismaService';
 
 @Module({
@@ -8,7 +8,7 @@ import { PrismaService } from './prisma/services/prismaService';
     PrismaService,
     {
       provide: NotificationRepository,
-      useClass: PrismaRepository
+      useClass: PrismaNotificationRepository
     }
   ],
   exports: [
